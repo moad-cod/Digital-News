@@ -1,14 +1,15 @@
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'aos/dist/aos.css';
+
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { EB_Garamond } from "next/font/google";
+import './variables.css';
 import "./globals.css";
+import Header from '@/components/Header';
 
-const geistSans = Geist({
+const ebGaramond = EB_Garamond({
   variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -24,7 +25,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${ebGaramond.variable}`}>
+        <Header></Header>
         {children}
       </body>
     </html>

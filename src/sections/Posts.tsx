@@ -7,10 +7,33 @@ import PostItemOne from '@/components/PostItemOne';
 import TrendingPost from '@/components/TrendingPost';
 import Preloader from '@/components/Preloader';
 
+export interface PostProps {
+  _id: string;
+  img: string;
+  category: string;
+  date: string; // Date will be serialized as string from API
+  title: string;
+  brief: string;
+  avatar: string;
+  author: string;
+}
+
+export const initialPost = {
+  _id: '',
+  img: '',
+  category: '',
+  date: '',
+  title: '',
+  brief: '',
+  avatar: '',
+  author: '',
+}
+
+
 export default function Posts() {
   const router = useRouter();
-  const [items, setItems] = useState<any[]>([]);
-  const [item, setItem] = useState<any | null>(null);
+  const [items, setItems] = useState([]);
+  const [item, setItem] = useState(initialPost);
 
   const getItemsData = () => {
     fetch('/api/postitems')
@@ -49,18 +72,9 @@ export default function Posts() {
                 {items &&
                 items.length > 0 ? 
                 items
-                  .filter((item) => !item.trending && !item.top)
+                  .filter((item: {trending: boolean, top: boolean}) => !item.trending && !item.top)
                   .slice(0, 3)
-                  .map((item: {
-                    _id: string;
-                    img: string;
-                    category: string;
-                    date: string; // Date will be serialized as string from API
-                    title: string;
-                    brief: string;
-                    avatar: string;
-                    author: string;
-                  }) => (
+                  .map((item: PostProps) => (
                     <PostItemOne key={item._id}  large={false} item={item}/>
           )): <Preloader />}
               </div>
@@ -68,18 +82,9 @@ export default function Posts() {
                 {items &&
                   items.length > 0 ?
                   items
-                    .filter((item) => !item.trending && !item.top)
+                    .filter((item: {trending: boolean, top: boolean}) => !item.trending && !item.top)
                     .slice(3, 6)
-                    .map((item: {
-                      _id: string;
-                      img: string;
-                      category: string;
-                      date: string; // Date will be serialized as string from API
-                      title: string;
-                      brief: string;
-                      avatar: string;
-                      author: string;
-                    }) => (
+                    .map((item: PostProps) => (
                       <PostItemOne key={item._id}  large={false} item={item}/>
                   )): <Preloader />
                   }
@@ -91,16 +96,7 @@ export default function Posts() {
                     {
                       items && items.length > 0 ? 
                       items.filter((item: {trending: boolean}) => item.trending)
-                        .map((item : {
-                      _id: string;
-                      img: string;
-                      category: string;
-                      date: string; // Date will be serialized as string from API
-                      title: string;
-                      brief: string;
-                      avatar: string;
-                      author: string;
-                    }, index: number) => (
+                        .map((item : PostProps, index: number) => (
                       <TrendingPost key={item._id} index={index} item={item}></TrendingPost>
                     )): <Preloader />
                       

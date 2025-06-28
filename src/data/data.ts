@@ -14,7 +14,7 @@ export const navs = [
   {
     id: 3,
     name: 'Create Post',
-    link: '/createpostitems',
+    link: '/createpostitem',
     active: false,
   },
   {

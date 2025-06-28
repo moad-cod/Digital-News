@@ -2,19 +2,14 @@ import React from 'react'
 import './postItemOne.css'
 import Link from 'next/link';
 import Image from 'next/image';
+import { PostProps } from '@/sections/Posts';
 
-export default function PostItemOne({large, item}: {
+export default function PostItemOne({
+    large, 
+    item,
+}: {
     large: boolean,
-    item: {
-        _id: string;
-        img: string;
-        category: string;
-        date: string; // Date will be serialized as string from API
-        title: string;
-        brief: string;
-        avatar: string;
-        author: string;
-    }
+    item: PostProps
 }) {
   return (
     <div className={`post-entry-1 ${large? 'lg' : undefined}` }>
